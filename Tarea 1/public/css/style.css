@@ -1,0 +1,263 @@
+:root {
+    --bg: #f4f6f9;
+    --surface: #ffffff;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --primary: #4f46e5;
+    --primary-dark: #4338ca;
+    --danger: #dc2626;
+    --success-bg: #dcfce7;
+    --success-text: #166534;
+    --error-bg: #fee2e2;
+    --error-text: #991b1b;
+    --radius: 8px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+}
+
+.navbar .brand {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text);
+}
+
+.navbar nav {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.nav-user {
+    color: var(--muted);
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+h1 {
+    margin: 0 0 0.5rem;
+}
+
+.muted {
+    color: var(--muted);
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+}
+
+.auth-card,
+.form-card {
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+}
+
+.card-actions,
+.form-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.card-actions form,
+.table-actions form {
+    display: inline;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: 600;
+    margin-top: 0.75rem;
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+}
+
+input,
+textarea,
+select {
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 1px;
+}
+
+.btn {
+    display: inline-block;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1.1rem;
+    border-radius: var(--radius);
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn:hover {
+    background: var(--primary-dark);
+    text-decoration: none;
+}
+
+.btn-sm {
+    padding: 0.35rem 0.7rem;
+    font-size: 0.85rem;
+}
+
+.btn-secondary {
+    background: #e5e7eb;
+    color: var(--text);
+}
+
+.btn-secondary:hover {
+    background: #d1d5db;
+}
+
+.btn-danger {
+    background: var(--danger);
+}
+
+.btn-danger:hover {
+    background: #b91c1c;
+}
+
+.alert {
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius);
+    margin-bottom: 1.25rem;
+}
+
+.alert ul {
+    margin: 0;
+    padding-left: 1.1rem;
+}
+
+.alert-success {
+    background: var(--success-bg);
+    color: var(--success-text);
+}
+
+.alert-error {
+    background: var(--error-bg);
+    color: var(--error-text);
+}
+
+.badge {
+    display: inline-block;
+    background: #eef2ff;
+    color: var(--primary-dark);
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+}
+
+.badge-pendiente {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.badge-en_progreso {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.badge-completada {
+    background: var(--success-bg);
+    color: var(--success-text);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+.table th,
+.table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+}
+
+.table th {
+    background: #f9fafb;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.table tr.row-done td {
+    opacity: 0.6;
+}
+
+.table-actions {
+    display: flex;
+    gap: 0.4rem;
+}
