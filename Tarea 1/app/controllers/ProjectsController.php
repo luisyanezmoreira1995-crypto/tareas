@@ -1,6 +1,6 @@
 <?php
 
-class ProjectController extends Controller
+class ProjectsController extends Controller
 {
     private Project $projectModel;
 

@@ -1,0 +1,35 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Escuchar Xdebug (servidor en marcha)",
+            "type": "php",
+            "request": "launch",
+            "port": 9003,
+            "pathMappings": {
+                "/": "${workspaceFolder}"
+            }
+        },
+        {
+            "name": "Servidor PHP + Xdebug (Run and Debug)",
+            "type": "php",
+            "request": "launch",
+            "port": 9003,
+            "runtimeExecutable": "C:\\xampp\\php\\php.exe",
+            "runtimeArgs": [
+                "-S",
+                "localhost:8000",
+                "-t",
+                "${workspaceFolder}/public",
+                "${workspaceFolder}/public/router.php"
+            ],
+            "program": "",
+            "cwd": "${workspaceFolder}/public",
+            "serverReadyAction": {
+                "pattern": "Development Server \\(http://localhost:8000\\) started",
+                "uriFormat": "http://localhost:8000",
+                "action": "openExternally"
+            }
+        }
+    ]
+}

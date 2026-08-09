@@ -1,6 +1,6 @@
 <?php
 
-class TaskController extends Controller
+class TasksController extends Controller
 {
     private Task $taskModel;
     private Project $projectModel;

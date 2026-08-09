@@ -11,7 +11,6 @@ class User
 
     public function register(string $name, string $email, string $password): bool
     {
-        $hash = password_hash($password, PASSWORD_DEFAULT);
         $stmt = $this->db->prepare(
             'INSERT INTO users (name, email, password) VALUES (:name, :email, :password)'
         );
@@ -19,7 +18,7 @@ class User
         return $stmt->execute([
             'name' => $name,
             'email' => $email,
-            'password' => $hash,
+            'password' => $password,
         ]);
     }
 

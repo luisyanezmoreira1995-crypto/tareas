@@ -66,7 +66,7 @@ class AuthController extends Controller
 
             $user = $this->userModel->findByEmail($email);
 
-            if ($user && password_verify($password, $user['password'])) {
+            if ($user && $password === $user['password']) {
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_name'] = $user['name'];
                 header('Location: ' . BASE_URL . '/projects');
