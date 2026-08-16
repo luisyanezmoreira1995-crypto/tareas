@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+    <title>Noticias BBC</title>
+ 
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+ 
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+ 
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+ 
+<body>
+ 
+<div class="container mt-4">
+ 
+    <button class="btn btn-primary mb-3" onclick="cargaNoticias()">
+        Cargar noticias
+    </button>
+ 
+    <table class="table table-bordered table-striped">
+ 
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Descripción</th>
+                <th>Fuente</th>
+                <th>Imagen</th>
+                <th>Opciones</th>
+            </tr>
+        </thead>
+ 
+        <tbody id="lista_noticias">
+        </tbody>
+ 
+    </table>
+ 
+</div>
+ 
+ 
+<!-- MODAL -->
+<div class="modal fade" id="exampleModal" tabindex="-1">
+ 
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+ 
+        <div class="modal-content">
+ 
+            <div class="modal-header">
+ 
+                <h5 class="modal-title" id="modalTitulo">
+                    Detalle de la noticia
+                </h5>
+ 
+                <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal">
+                </button>
+ 
+            </div>
+ 
+            <div class="modal-body">
+ 
+                <img id="modalImagen"
+                    class="img-fluid rounded mb-3 w-100"
+                    style="max-height:450px; object-fit:cover;">
+ 
+                <h3 id="modalTitulo2"></h3>
+ 
+                <hr>
+ 
+                <p>
+                    <strong>Fuente:</strong>
+                    <span id="modalFuente"></span>
+                </p>
+ 
+                <p>
+                    <strong>Autor:</strong>
+                    <span id="modalAutor"></span>
+                </p>
+ 
+                <p>
+                    <strong>Fecha:</strong>
+                    <span id="modalFecha"></span>
+                </p>
+ 
+                <h5>Descripción</h5>
+                <p id="modalDescripcion"></p>
+ 
+                <h5>Contenido</h5>
+                <p id="modalContenido"></p>
+ 
+            </div>
+ 
+            <div class="modal-footer">
+ 
+                <a id="modalUrl"
+                    href="#"
+                    target="_blank"
+                    class="btn btn-primary">
+ 
+                    Ver noticia original
+ 
+                </a>
+ 
+                <button type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal">
+ 
+                    Cerrar
+ 
+                </button>
+ 
+            </div>
+ 
+        </div>
+ 
+    </div>
+ 
+</div>
+ 
+ 
+<script>
+ 
+var noticias = [];
+ 
+ 
+function cargaNoticias() {
+ 
+    $.ajax({
+ 
+        url: "http://localhost:5080/api/noticias",
+ 
+        method: "GET",
+ 
+        success: function(datos) {
+ 
+            noticias = datos.articles;
+ 
+            var filas = "";
+ 
+            $.each(noticias, function(i, n) {
+ 
+                filas += `
+                    <tr>
+ 
+                        <td>${n.title || ""}</td>
+ 
+                        <td>${n.description || ""}</td>
+ 
+                        <td>${n.source.name || ""}</td>
+ 
+                        <td>
+                            <img src="${n.urlToImage || ""}"
+                                width="120"
+                                class="img-fluid">
+                        </td>
+ 
+                        <td>
+ 
+                            <button
+                                class="btn btn-primary btn-detalle"
+                                data-id="${i}"
+                                data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
+ 
+                                Ver detalles
+ 
+                            </button>
+ 
+                        </td>
+ 
+                    </tr>
+                `;
+ 
+            });
+ 
+            $("#lista_noticias").html(filas);
+ 
+        },
+ 
+        error: function(error) {
+ 
+            console.log(error);
+ 
+            $("#lista_noticias").html(`
+                <tr>
+                    <td colspan="5">
+                        Error al cargar las noticias
+                    </td>
+                </tr>
+            `);
+ 
+        }
+ 
+    });
+ 
+}
+ 
+ 
+// VER DETALLE
+$(document).on("click", ".btn-detalle", function() {
+ 
+    var id = $(this).data("id");
+ 
+    var n = noticias[id];
+ 
+    $("#modalTitulo").text(n.title || "Sin título");
+ 
+    $("#modalTitulo2").text(n.title || "");
+ 
+    $("#modalFuente").text(n.source.name || "Sin fuente");
+ 
+    $("#modalAutor").text(n.author || "Sin autor");
+ 
+    $("#modalFecha").text(n.publishedAt || "Sin fecha");
+ 
+    $("#modalDescripcion").text(
+        n.description || "Sin descripción"
+    );
+ 
+    $("#modalContenido").text(
+        n.content || "Sin contenido"
+    );
+ 
+    $("#modalUrl").attr("href", n.url || "#");
+ 
+ 
+    if (n.urlToImage) {
+ 
+        $("#modalImagen")
+            .attr("src", n.urlToImage)
+            .show();
+ 
+    } else {
+ 
+        $("#modalImagen").hide();
+ 
+    }
+ 
+});
+ 
+</script>
+ 
+</body>
+</html>
