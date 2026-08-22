@@ -12,7 +12,10 @@ $statusLabels = [
 
 <div class="page-header">
     <h1>Tareas de "<?= htmlspecialchars($project['name']) ?>"</h1>
-    <a href="<?= BASE_URL ?>/tasks/create/<?= $project['id'] ?>" class="btn">+ Nueva tarea</a>
+    <div class="table-actions">
+        <a href="<?= BASE_URL ?>/reports/tasks/<?= $project['id'] ?>" class="btn btn-secondary">Descargar PDF</a>
+        <a href="<?= BASE_URL ?>/tasks/create/<?= $project['id'] ?>" class="btn">+ Nueva tarea</a>
+    </div>
 </div>
 
 <?php if (empty($tasks)): ?>

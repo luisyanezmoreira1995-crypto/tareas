@@ -1,0 +1,33 @@
+<div class="container">
+  <h1>Mi lista de tareas</h1>
+  <div>
+    <input
+      type="text"
+      placeholder="Nueva tarea..."
+      [(ngModel)]="nuevaTarea"
+      (keyup.enter)="newTask()"
+    />
+    <button class="btn btn-primary" (click)="newTask()">Agregar</button>
+    <button class="btn btn-secondary" (click)="descargarPdf()">Descargar PDF</button>
+  </div>
+  <div class="task-list">
+    <table class="table table-responsive table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Tarea</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (tarea of lista_tareas(); track tarea.id) {
+          <tr>
+            <td>{{ tarea.nombre }}</td>
+            <td>
+              <button class="btn btn-danger" (click)="eliminar(tarea.id)">Eliminar</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
