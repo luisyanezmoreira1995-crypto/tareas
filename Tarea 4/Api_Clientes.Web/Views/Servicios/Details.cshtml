@@ -1,0 +1,21 @@
+@model Servicio
+
+@{
+    ViewData["Title"] = "Detalles Servicio";
+}
+
+<h1>Detalles del Servicio</h1>
+
+<dl class="row">
+    <dt class="col-sm-2">Nombre</dt>
+    <dd class="col-sm-10">@Model.Nombre</dd>
+    <dt class="col-sm-2">Descripción</dt>
+    <dd class="col-sm-10">@Model.Descripcion</dd>
+    <dt class="col-sm-2">Precio</dt>
+    <dd class="col-sm-10">@Model.Precio.ToString("C")</dd>
+    <dt class="col-sm-2">Duración (min)</dt>
+    <dd class="col-sm-10">@Model.DuracionMinutos</dd>
+</dl>
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Editar</a>
+<a asp-action="Index" class="btn btn-primary">Volver a la lista</a>

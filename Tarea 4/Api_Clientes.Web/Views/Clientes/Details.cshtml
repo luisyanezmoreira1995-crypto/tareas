@@ -1,0 +1,25 @@
+@model Cliente
+
+@{
+    ViewData["Title"] = "Detalles Cliente";
+}
+
+<h1>Detalles del Cliente</h1>
+
+<dl class="row">
+    <dt class="col-sm-2">Nombres</dt>
+    <dd class="col-sm-10">@Model.Nombres</dd>
+    <dt class="col-sm-2">Apellidos</dt>
+    <dd class="col-sm-10">@Model.Apellidos</dd>
+    <dt class="col-sm-2">Dirección</dt>
+    <dd class="col-sm-10">@Model.Direccion</dd>
+    <dt class="col-sm-2">Teléfono</dt>
+    <dd class="col-sm-10">@Model.Telefono</dd>
+    <dt class="col-sm-2">Email</dt>
+    <dd class="col-sm-10">@Model.Email</dd>
+    <dt class="col-sm-2">RUC</dt>
+    <dd class="col-sm-10">@Model.Ruc</dd>
+</dl>
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Editar</a>
+<a asp-action="Index" class="btn btn-primary">Volver a la lista</a>

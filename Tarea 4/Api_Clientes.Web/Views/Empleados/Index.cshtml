@@ -1,0 +1,45 @@
+@model List<Empleado>
+
+@{
+    ViewData["Title"] = "Empleados";
+}
+
+<h1>Empleados</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Crear nuevo</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Cargo</th>
+            <th>Teléfono</th>
+            <th>Email</th>
+            <th>Salario</th>
+            <th>Fecha de contratación</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model)
+{
+        <tr>
+            <td>@item.Nombres</td>
+            <td>@item.Apellidos</td>
+            <td>@item.Cargo</td>
+            <td>@item.Telefono</td>
+            <td>@item.Email</td>
+            <td>@item.Salario.ToString("C")</td>
+            <td>@item.FechaContratacion.ToString("d")</td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Detalles</a>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-secondary">Editar</a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
