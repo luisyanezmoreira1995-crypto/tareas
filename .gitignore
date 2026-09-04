@@ -1,11 +1,8 @@
-# Visual Studio
 .vs/
 *.user
 *.suo
 
-# Build results
 bin/
 obj/
 
-# Claude Code local settings
 .claude/
