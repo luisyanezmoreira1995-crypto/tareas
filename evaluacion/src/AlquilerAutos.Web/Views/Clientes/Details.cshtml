@@ -1,0 +1,22 @@
+@model ClienteDto
+@{
+    ViewData["Title"] = "Detalle del cliente";
+}
+
+<h1>@Model.Nombre @Model.Apellido</h1>
+
+<dl class="row">
+    <dt class="col-sm-3">Documento</dt>
+    <dd class="col-sm-9">@Model.DocumentoIdentidad</dd>
+    <dt class="col-sm-3">Teléfono</dt>
+    <dd class="col-sm-9">@Model.Telefono</dd>
+    <dt class="col-sm-3">Email</dt>
+    <dd class="col-sm-9">@Model.Email</dd>
+    <dt class="col-sm-3">Dirección</dt>
+    <dd class="col-sm-9">@Model.Direccion</dd>
+    <dt class="col-sm-3">Fecha de registro</dt>
+    <dd class="col-sm-9">@Model.FechaRegistro.ToString("yyyy-MM-dd")</dd>
+</dl>
+
+<a class="btn btn-secondary" asp-action="Index">Volver</a>
+<a class="btn btn-outline-primary" asp-controller="Reportes" asp-action="ContratosPorCliente" asp-route-clienteId="@Model.Id">Ver contratos</a>

@@ -1,0 +1,35 @@
+@model AlquilerAutos.Web.Models.ContratoEditViewModel
+@{
+    ViewData["Title"] = "Editar contrato";
+}
+
+<h1>Editar contrato</h1>
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<p><strong>Cliente:</strong> @Model.ClienteNombre &nbsp; <strong>Vehículo:</strong> @Model.VehiculoDescripcion</p>
+
+<form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+    <div class="mb-3">
+        <label class="form-label">Fecha de inicio</label>
+        <input asp-for="Contrato.FechaInicio" class="form-control" type="date" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Fecha de fin</label>
+        <input asp-for="Contrato.FechaFin" class="form-control" type="date" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Fecha de devolución real</label>
+        <input asp-for="Contrato.FechaDevolucionReal" class="form-control" type="date" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Estado</label>
+        <select asp-for="Contrato.Estado" class="form-select" asp-items="Html.GetEnumSelectList<EstadoContrato>()"></select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Observaciones</label>
+        <textarea asp-for="Contrato.Observaciones" class="form-control"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a class="btn btn-secondary" asp-action="Index">Cancelar</a>
+</form>

@@ -1,0 +1,41 @@
+@model AlquilerAutos.Web.Models.ContratoCreateViewModel
+@{
+    ViewData["Title"] = "Nuevo contrato";
+}
+
+<h1>Nuevo contrato</h1>
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label class="form-label">Cliente</label>
+        <select asp-for="Contrato.ClienteId" class="form-select" asp-items="@(new SelectList(Model.Clientes, "Id", "Nombre"))">
+            <option value="">-- Seleccione --</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Vehículo (solo disponibles)</label>
+        <select asp-for="Contrato.VehiculoId" class="form-select">
+            <option value="">-- Seleccione --</option>
+            @foreach (var v in Model.Vehiculos)
+            {
+                <option value="@v.Id">@v.Marca @v.Modelo (@v.Placa) - @v.TarifaDiaria.ToString("C")/día</option>
+            }
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Fecha de inicio</label>
+        <input asp-for="Contrato.FechaInicio" class="form-control" type="date" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Fecha de fin</label>
+        <input asp-for="Contrato.FechaFin" class="form-control" type="date" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Observaciones</label>
+        <textarea asp-for="Contrato.Observaciones" class="form-control"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a class="btn btn-secondary" asp-action="Index">Cancelar</a>
+</form>

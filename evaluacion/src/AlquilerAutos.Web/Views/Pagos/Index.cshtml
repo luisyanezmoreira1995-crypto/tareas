@@ -1,0 +1,36 @@
+@model List<PagoDto>
+@{
+    ViewData["Title"] = "Pagos";
+}
+
+<h1>Pagos</h1>
+
+<p><a class="btn btn-primary" asp-action="Create">Nuevo pago</a></p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Contrato</th>
+            <th>Fecha</th>
+            <th>Monto</th>
+            <th>Método</th>
+            <th>Referencia</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>#@p.ContratoId</td>
+                <td>@p.FechaPago.ToString("yyyy-MM-dd")</td>
+                <td>@p.Monto.ToString("C")</td>
+                <td>@p.MetodoPago</td>
+                <td>@p.Referencia</td>
+                <td>
+                    <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@p.Id">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

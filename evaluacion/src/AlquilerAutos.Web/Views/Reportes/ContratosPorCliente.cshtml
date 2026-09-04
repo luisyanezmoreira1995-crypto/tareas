@@ -1,0 +1,76 @@
+@model AlquilerAutos.Web.Models.ReporteViewModel
+@{
+    ViewData["Title"] = "Reporte de contratos por cliente";
+}
+
+<h1>Reporte de contratos por cliente</h1>
+
+<form method="get" class="row g-2 align-items-end mb-4">
+    <div class="col-auto">
+        <label class="form-label">Cliente</label>
+        <select name="clienteId" class="form-select" onchange="this.form.submit()">
+            <option value="">-- Seleccione un cliente --</option>
+            @foreach (var c in Model.Clientes)
+            {
+                if (Model.ClienteSeleccionadoId == c.Id)
+                {
+                    <option value="@c.Id" selected>@c.Nombre @c.Apellido (@c.DocumentoIdentidad)</option>
+                }
+                else
+                {
+                    <option value="@c.Id">@c.Nombre @c.Apellido (@c.DocumentoIdentidad)</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Consultar</button>
+    </div>
+</form>
+
+@if (Model.Reporte is not null)
+{
+    <div class="mb-3">
+        <a class="btn btn-outline-danger" asp-action="ExportarPdf" asp-route-clienteId="@Model.Reporte.ClienteId">Exportar PDF</a>
+        <a class="btn btn-outline-success" asp-action="ExportarExcel" asp-route-clienteId="@Model.Reporte.ClienteId">Exportar Excel</a>
+    </div>
+
+    <h3>@Model.Reporte.ClienteNombre (@Model.Reporte.DocumentoIdentidad)</h3>
+
+    @if (Model.Reporte.Contratos.Count == 0)
+    {
+        <p>Este cliente no tiene contratos registrados.</p>
+    }
+    else
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Contrato</th>
+                    <th>Vehículo</th>
+                    <th>Inicio</th>
+                    <th>Fin</th>
+                    <th>Estado</th>
+                    <th>Total</th>
+                    <th>Pagado</th>
+                    <th>Saldo</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var c in Model.Reporte.Contratos)
+                {
+                    <tr>
+                        <td>#@c.ContratoId</td>
+                        <td>@c.VehiculoDescripcion</td>
+                        <td>@c.FechaInicio.ToString("yyyy-MM-dd")</td>
+                        <td>@c.FechaFin.ToString("yyyy-MM-dd")</td>
+                        <td>@c.Estado</td>
+                        <td>@c.Total.ToString("C")</td>
+                        <td>@c.TotalPagado.ToString("C")</td>
+                        <td>@c.SaldoPendiente.ToString("C")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
